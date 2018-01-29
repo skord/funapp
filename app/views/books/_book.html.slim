@@ -1,0 +1,11 @@
+.column
+  =link_to category_book_path(book.category, book), class: '' do
+    .image
+      img src=book.cover_image.book
+    .header= book.title
+  .row
+    .ui.star.rating data-max-rating='5' data-rating=book.reviews.average(:rating).to_i
+    i= "(" + book.reviews.count.to_s + ")"
+  = number_to_currency book.price
+
+

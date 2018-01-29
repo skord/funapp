@@ -1,0 +1,35 @@
+.ui.container.grid
+  .row
+    .ui.breadcrumb
+      = link_to "Home", categories_path, class: 'section'
+      .divider 
+        | / 
+      .section
+      = link_to "Category: #{@book.category.name}", category_books_path(@book.category)
+      .divider
+        | /
+      .section= @book.title
+  .row
+    h1= @book.title
+  .row
+    = image_tag @book.cover_image
+  .row
+    h3 From #{random_publication} bestselling author #{@book.author} comes a #{random_adj} story about #{FFaker::HipsterIpsum.words.to_sentence} -- perfect for fans of #{ FFaker::Book.author }, #{ FFaker::Book.author }, and #{ FFaker::Book.author }.
+  .row
+    h4 ##{@book.position} in #{@book.category.name }!
+  .row
+    h5 Description
+    p #{random_desc(8)}
+  .row
+    h5 ©2018 #{@book.author}
+  .ui.horizontal.divider
+    h3 Customers also bought...
+  .row
+    .ui.five.column.grid
+      = render @similar_books
+  
+  .ui.horizontal.divider
+  .row
+    h3 Customer Reviews
+  = render @book.reviews
+

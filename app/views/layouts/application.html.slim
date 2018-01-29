@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title Fakeazon
+    = csrf_meta_tags
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body
+    .ui.top.inverted.blue.menu
+      .header.item Fake-azon
+      = link_to "Books", categories_path, class: 'item'
+    = yield 

@@ -1,0 +1,28 @@
+.ui.container.grid
+  .row
+    .ui.breadcrumb
+      = link_to "Home", root_path, class: 'section'
+      .divider 
+        | / 
+      .section Category: #{@book.category.name}
+  .row
+    h1= @book.title
+  .row
+    img src="http://via.placeholder.com/250x150"
+  .row
+    h3 From #{random_publication} bestselling author #{@book.author} comes a #{random_adj} story about #{FFaker::HipsterIpsum.words.to_sentence} -- perfect for fans of #{ FFaker::Book.author }, #{ FFaker::Book.author }, and #{ FFaker::Book.author }.
+  .row
+    .ui.orange.label Top #{@book.position} Release!
+  .row
+    h5 Description
+    p #{random_desc(8)}
+  .row
+    h5 ©2018 #{@book.author}
+  .ui.horizontal.divider
+    h3 Customers also bought...
+  .row
+    .ui.cards
+      = render @books
+  
+  .ui.horizontal.divider
+    h3 Customer REviews

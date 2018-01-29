@@ -1,0 +1,14 @@
+octopus:
+  replicated: true
+  fully_replicated: false
+  octopus_environments:
+    - development
+    - production
+  development:
+    shards:
+      slave1:
+        adapter: mysql2
+        host: <%= ENV['FUNAPP_SHARD_HOST'] %>
+        port: <%= ENV['FUNAPP_SHARD_PORT'] %>
+        database: funapp_development
+

@@ -1,0 +1,25 @@
+.ui.container.grid
+  .row
+    .ui.breadcrumb
+      = link_to "Home", categories_path, class: 'section'
+      .divider 
+        | / 
+      .section Category
+  .row
+    h1.yellow= @category.name
+  - unless params[:page].present?
+    .row
+      h3 Best Sellers
+    .row
+      .ui.five.column.grid
+        = render @best_sellers
+
+    .row
+      h3 Bargain Bin!
+    .row
+      .ui.five.column.grid
+        = render @on_sale
+  =render @books
+  .row
+    .ui.five.column.grid
+      = paginate @books
