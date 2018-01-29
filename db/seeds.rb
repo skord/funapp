@@ -29,3 +29,7 @@ categories = [
 categories.each do |cat|
   FactoryBot.create(:category_with_books, name: cat[:name], icon: cat[:icon], color: colors.sample, books_count: 100)
 end
+
+Book.find_each do |book|
+  100.times { FactoryBot.create(:review, book: book) }
+end
