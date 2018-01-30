@@ -104,7 +104,7 @@ class Muse
       [
         adjectives.sample(pre_adj_count),
         compound_subject(non_proper_nouns.sample, non_proper_nouns.sample),
-        verbs.sample,
+        verbs.sample.downcase,
         "the",
         noun_with_modifier(non_proper_nouns.sample)
       ].flatten.join(" ")

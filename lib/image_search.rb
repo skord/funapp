@@ -15,7 +15,12 @@ class BingSearch
     JSON.parse(response.body)
   end
   def self.get_image_url(term)
-    res = search(term)["value"][0]
-    {thumbnail_url: res['thumbnailUrl'], image_url: res["contentUrl"]}
+    res = search(term)
+    if res["value"].blank?
+      {thumbnail_url: nil, image_url: nil}
+    else
+      res = res['value'][0]
+      {thumbnail_url: res['thumbnailUrl'], image_url: res["contentUrl"]}
+    end
   end
 end
