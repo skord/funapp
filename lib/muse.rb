@@ -1,6 +1,6 @@
 # unworkable: Prehistoric, paranormal post-apocalyptic, dystopian, 
 class Muse
-  CONNECTORS = ["of the", "and the", "and", "and my", "and his", "and her"]
+  CONNECTORS = ["of the", "and the", "and", "of"]
   CATEGORIES =  ["Adventure",
                  "Apocalypse",
                  "Science Fiction",
