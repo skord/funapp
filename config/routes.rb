@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   get 'books/random'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: 'books#random'
+  root to: 'categories#index'
 end
