@@ -7,29 +7,42 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 #
 colors = ['red','orange','yellow','olive','green','teal','blue','violet','purple','pink','brown','grey']
-categories = [
-  {name: "Children's", icon: 'child'},
-  {name: "Mystery", icon: 'spy'},
-  {name: "Medical", icon: 'doctor'},
-  {name: "Textbooks", icon: 'student'},
-  {name: "Star Trek", icon: 'hand spock'},
-  {name: "Legal", icon: 'law'},
-  {name: "Travel", icon: 'road'},
-  {name: "Ecology", icon: 'leaf'},
-  {name: "Booze", icon: 'cocktail'},
-  {name: "Lemons", icon: 'lemon'},
-  {name: "Startups", icon: 'money'},
-  {name: "Sports", icon: 'soccer'},
-  {name: "Geography",icon: 'world'},
-  {name: "Games", icon: 'puzzle'},
-  {name: "Magnets", icon: 'magnet'}
-]
-
+icons = File.read(File.join(Rails.root,'lib/icons.txt')).split("\n")
+categories = Muse::CATEGORIES
 
 categories.each do |cat|
-  FactoryBot.create(:category_with_books, name: cat[:name], icon: cat[:icon], color: colors.sample, books_count: 100)
+  category = Category.where(name: cat).first_or_create do |new_cat|
+    new_cat.icon = icons.sample
+    new_cat.color = colors.sample
+  end
+  muse = Muse.new(cat)
+  if muse.can_complex_title?
+    book_minimum = 300
+    book_maximum = 500
+  else
+    book_minimum = 100
+    book_maximum = 200
+  end
+  book_rand_count = rand(book_minimum..book_maximum)
+  if category.books.count < book_minimum
+    puts "Musing Category: #{cat}"
+    muse = Muse.new(cat)
+    book_rand_count.times do
+      the_title = muse.title
+      puts "Musing Book: #{the_title}"
+      category.books.create(
+        title: the_title,
+        description: FFaker::DizzleIpsum.paragraph,
+        author: FFaker::Book.author,
+        genre: cat,
+        isbn: FFaker::Book.isbn,
+        price: rand(0.00...40.00).round(2)
+      )
+      sleep 1
+    end
+  end
 end
 
 Book.find_each do |book|
-  100.times { FactoryBot.create(:review, book: book) }
+  (5...200).to_a.sample.times { FactoryBot.create(:review, book: book) }
 end
