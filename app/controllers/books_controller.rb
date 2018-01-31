@@ -10,6 +10,7 @@ class BooksController < ApplicationController
     @category = Category.find(params[:category_id])
     @book = @category.books.find(params[:id])
     @similar_books = @category.books.order("RAND()").where.not(id: @book.id).limit(5)
+    @recent_reviews = @book.reviews.order('created_at desc').limit(10)
   end
   def random
     @book = Book.order("RAND()").first

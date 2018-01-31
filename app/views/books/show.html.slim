@@ -10,26 +10,58 @@
         | /
       .section= @book.title
   .row
-    h1= @book.title
-  .row
-    = image_tag @book.cover_image
-  .row
-    h3 From #{random_publication} bestselling author #{@book.author} comes a #{random_adj} story about #{FFaker::HipsterIpsum.words.to_sentence} -- perfect for fans of #{ FFaker::Book.author }, #{ FFaker::Book.author }, and #{ FFaker::Book.author }.
-  .row
-    h4 ##{@book.position} in #{@book.category.name }!
-  .row
-    h5 Description
-    p #{random_desc(8)}
-  .row
-    h5 ©2018 #{@book.author}
+    .ui.grid
+      .four.wide.column
+        .ui.card
+          .image
+            = image_tag @book.cover_image.book
+      .eight.wide.column
+        .row
+          h1= @book.title
+        .row
+          h5 by #{@book.author}
+        .row
+          .ui.star.rating data-max-rating='5' data-rating=@book.reviews.average(:rating).to_i
+          b #{@book.reviews.count} reviews
+        .row
+          br
+          br
+          br
+          h3 From #{random_publication} bestselling author #{@book.author} comes a #{random_adj} story about #{FFaker::HipsterIpsum.words.to_sentence} -- perfect for fans of #{ FFaker::Book.author }, #{ FFaker::Book.author }, and #{ FFaker::Book.author }.
+        .row
+          h4 ##{@book.position} in #{@book.category.name }!
+        .row
+          h5 Description
+          p #{random_desc(8)}
+        .row
+          h5 ©2018 #{@book.author}
+      .four.wide.column
+        .ui.segment
+          h3 Your Price: #{number_to_currency(@book.price)}
+          h3 Out of Stock
+          p We're sorry, this book has been so popular we've temporarily out of stock of it. 
+          p Check back again soon for updates!
   .ui.horizontal.divider
-    h3 Customers also bought...
+    h3 Frequently Purchased With
   .row
     .ui.five.column.grid
       = render @similar_books
   
   .ui.horizontal.divider
+    h3 Customer Buzz
   .row
-    h3 Customer Reviews
-  = render @book.reviews
+    .twelve.wide.column
+      h3 Recent Customer Reviews
+      .row
+        .ui.comments.fluid
+          = render @recent_reviews
+      - if @book.reviews.count > 10
+        .row
+          = link_to book_reviews_path(@book) do
+            h3 See all Reviews...
+    .four.wide.column
+      h3 Customers Also Viewed...
+      .ui.one.column.grid
+        = render @similar_books
+      
 

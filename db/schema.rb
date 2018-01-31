@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20180127220436) do
 
-  create_table "books", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "books", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20180127220436) do
     t.index ["category_id"], name: "index_books_on_category_id"
   end
 
-  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20180127220436) do
     t.string "color"
   end
 
-  create_table "reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "reviewer_name"
     t.integer "rating"
     t.text "review"

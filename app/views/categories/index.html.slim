@@ -6,15 +6,9 @@
     .three.wide.column
       .ui.vertical.menu
         .item
-          .header Popular in Books
+          .header Top Categories
           .menu
-            .item Award Winners
-            .item Bargains
-            .item Best Sellers
-        .item
-          .header Categories
-          .menu
-            - @categories.each do |cat|
+            - @top_categories.each do |cat|
               = link_to cat.name, category_books_path(cat), class: "item"
 
             
@@ -27,3 +21,9 @@
         .ui.five.statistics
           - @categories.sample(5).each do |cat|
             = render cat
+      .row
+        .ui.horizontal.divider
+          h1 All Categories
+      .row
+        .ui.five.statistics
+          = render @categories

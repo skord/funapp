@@ -1,0 +1,43 @@
+.ui.container.grid
+  .row
+    .ui.breadcrumb
+      = link_to "Home", categories_path, class: 'section'
+      .divider 
+        | / 
+      .section
+      = link_to "Category: #{@book.category.name}", category_books_path(@book.category)
+      .divider
+        | /
+      .section
+        = link_to @book.title, category_book_path(@book.category, @book)
+      .divider
+        | /
+      .section All Customer Reviews
+  .row
+    .ui.grid
+      .four.wide.column
+        .ui.card
+          .image
+            = image_tag @book.cover_image.book
+      .eight.wide.column
+        .row
+          h1= @book.title
+        .row
+          h5 by #{@book.author}
+        .row
+          .ui.star.rating data-max-rating='5' data-rating=@book.reviews.average(:rating).to_i
+          b #{@book.reviews.count} reviews
+      .four.wide.column
+        .ui.segment
+          h3 Your Price: #{number_to_currency(@book.price)}
+          h3 Out of Stock
+          p We're sorry, this book has been so popular we've temporarily out of stock of it. 
+          p Check back again soon for updates!
+.ui.container.grid
+  .row
+    .sixteen.wide.column
+      .ui.comments
+        = render @reviews
+  .row
+    .sixteen.wide.column
+      = paginate @reviews

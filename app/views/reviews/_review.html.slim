@@ -1,5 +1,9 @@
-.row
-  .ui.star.rating data-max-rating='5' data-rating=review.rating
-  b #{review.reviewer_name} #{review.created_at}
-  p #{review.review}
+.comment
+  .content
+    a.author #{review.reviewer_name}
+    .metadata
+      .ui.star.rating data-max-rating='5' data-rating=review.rating
+      p  #{time_ago_in_words(review.created_at)} ago
+    .text
+      p #{review.review}
 
