@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title Fakeazon
+    title Dankazon
     = csrf_meta_tags
 
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -9,6 +9,6 @@ html
 
   body
     .ui.top.inverted.blue.menu
-      .header.item Fake-azon
+      .header.item Dankazon
       = link_to "Books", categories_path, class: 'item'
     = yield 
