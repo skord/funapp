@@ -1,0 +1,27 @@
+.ui.container.grid
+  .row
+    .sixteen.wide.column
+      .ui.breadcrumb
+        = link_to "Home", categories_path, class: 'section'
+        .divider 
+          | / 
+        .section
+        = link_to "Category: #{@book.category.name}", category_books_path(@book.category)
+        .divider
+          | /
+        .section
+        = link_to @book.title, category_book_path(@book.category, @book)
+        .divider
+          | /
+        .section= "New Review"
+  .row
+    .sixteen.wide.column
+      h1 Reviewing #{@book.title}
+    .sixteen.wide.column
+      h5 By #{@book.author}
+  .row
+    .sixteen.wide.column
+      = form_for([@book, @review], html: {class: 'ui form'}) do |f|
+        = f.text_area :review
+        = f.submit "Submit Review", class: 'ui button'
+

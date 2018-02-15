@@ -1,4 +1,13 @@
 .ui.container.grid
+  - if notice
+    .row
+      .ten.wide.centered.column
+        .ui.icon.positive.message
+          i.icon.checkmark
+          .content
+            .header
+              Review Accepted!
+            p= notice
   .row
     .ui.breadcrumb
       = link_to "Home", categories_path, class: 'section'
@@ -36,11 +45,16 @@
         .row
           h5 ©2018 #{@book.author}
       .four.wide.column
-        .ui.segment
-          h3 Your Price: #{number_to_currency(@book.price)}
-          h3 Out of Stock
-          p We're sorry, this book has been so popular we've temporarily out of stock of it. 
-          p Check back again soon for updates!
+        .ui.segments
+          .ui.segment
+            h3 Your Price: #{number_to_currency(@book.price)}
+            h3 Out of Stock
+            p We're sorry, this book has been so popular we've temporarily out of stock of it. 
+            p Check back again soon for updates!
+          .ui.segment
+            h3 Write a review!
+            p Write a review and let people know your opinion!
+            = link_to "Write Review", new_book_review_path(@book), class: 'ui orange button'
   .ui.horizontal.divider
     h3 Frequently Purchased With
   .row
